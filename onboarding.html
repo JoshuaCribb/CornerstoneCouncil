@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cornerstone</title>
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+body {
+  margin: 0;
+  font-family: Tahoma, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #000;
+  color: #fff;
+}
+
+body.locked > *:not(.login-screen) {
+  filter: blur(25px);
+  pointer-events: none;
+  user-select: none;
+}
+
+main {
+  flex: 1;
+}
+
+header {
+  width: 100%;
+  height: 100px;
+  background-color: #000000;
+  border-bottom: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.logo {
+  max-height: 100px;
+  width: auto;
+  height: auto;
+}
+
+.login-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.login-box {
+  background-color: #c0c0c0;
+  padding: 30px;
+  border: 2px solid #808080;
+  box-shadow: 3px 3px 0px #808080;
+  text-align: center;
+  width: 300px;
+}
+
+.login-box h2 {
+  color: #000;
+  margin-top: 10px;
+}
+
+.login-box input {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #808080;
+  font-family: Tahoma, sans-serif;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #808080;
+  background-color: #c0c0c0;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px #808080;
+  font-family: Arial, sans-serif;
+  color: #000;
+}
+
+.login-box button:active {
+  box-shadow: 1px 1px 0px #808080;
+  transform: translate(2px, 2px);
+}
+
+.return-btn {
+  display: inline-block;
+  margin-top: 10px;
+  background-color: #c0c0c0;
+  color: #000;
+  text-decoration: none;
+  padding: 6px 12px;
+  border: 2px solid #808080;
+  box-shadow: 3px 3px 0px #808080;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+
+.return-btn:active {
+  box-shadow: 1px 1px 0px #808080;
+  transform: translate(2px, 2px);
+}
+
+footer {
+  width: 100%;
+  height: 70px;
+  background-color: #c0c0c0;
+  border-top: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+footer p {
+  margin: 0;
+  line-height: 1.2;
+}
+  </style>
+</head>
+
+<body class="locked">
+
+  <div class="login-screen" id="loginScreen">
+    <div class="login-box">
+      <a href="careers.html" class="return-btn">Return</a>
+      <h2>Agent Login</h2>
+      <input type="password" id="passwordInput" placeholder="Enter password">
+      <button onclick="submitPassword()">Login</button>
+      <p id="loginError" style="color:red; display:none;">Incorrect password</p>
+    </div>
+  </div>
+
+  <header>
+    <img src="assets/agentlogo.png" alt="Cornerstone Firm Logo" class="logo">
+  </header>
+
+  <nav>
+    <div class="nav-container">
+      <a href="#" class="nav-btn">Incentives</a>
+      <a href="compensation.html" class="nav-btn">Compensation Guide</a>
+      <a href="resources.html" class="nav-btn">Resources</a>
+      <a href="onboarding.html" class="nav-btn">Onboarding</a>
+      <a href="index.html" class="nav-btn">Back to Home</a>
+    </div>
+  </nav>
+
+<main class="content" style="flex:1; background:#000; display:flex; flex-direction:column; align-items:center; padding:10px 10px; gap:20px;">
+
+</main>
+
+  <footer>
+    <p>
+      <a href="privacypolicy.html" style="color: rgb(0, 0, 0); text-decoration: underline;">
+        Privacy Policy © <span id="year"></span>
+      </a>
+    </p>
+    <p>Cornerstone Foundation Group. Established 2026.</p>
+  </footer>
+
+  <script src="auth.js"></script>
+
+  <script>
+    window.onload = function () {
+      document.getElementById("year").textContent = new Date().getFullYear();
+      document.getElementById("passwordInput").value = "";
+      requireAuth();
+    };
+  </script>
+
+</body>
+</html>

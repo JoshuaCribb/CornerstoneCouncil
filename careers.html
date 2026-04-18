@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cornerstone</title>
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <header>
+    <img src="assets/logo.png" alt="Cornerstone Logo" class="logo">
+
+    <a href="compensation.html" class="agent-login-btn">Portal Login</a>
+  </header>
+
+<nav>
+    <div class="nav-container">
+      <a href="index.html" class="nav-btn">Home</a>
+      <a href="foundation.html" class="nav-btn">Foundation</a>
+      <a href="#" class="nav-btn">Our Mission</a>
+      <a href="#" class="nav-btn">Credibility</a>
+      <a href="#" class="nav-btn">Specialties</a>
+      <div class="dropdown">
+  <a href="#" class="nav-btn" onclick="toggleDropdown(event)">
+    Consulting
+  </a>
+  <div class="dropdown-content" id="consultingMenu">
+    <a href="demoform.html">Strategy Consultation</a>
+    <a href="https://calendly.com/tyreseconsulting/credit-strategy" target="_blank">Credit Strategy Consultation</a>
+  </div>
+</div>
+      <a href="careers.html" class="nav-btn">Careers</a>
+    </div>
+  </nav>
+
+  <main class="content">
+    <div class="video-container">
+      <video controls>
+        <source src="assets/Career.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="form-container">
+  <h2 style="color:black;">Cornerstone Onboarding:</h2>
+      <form>
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Date of Birth" required>
+        <input type="email" placeholder="Email Address" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <input type="tel" placeholder="Recruiter" required>
+
+        <select required>
+          <option value="">Are You Licensed?</option>
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+
+        <select required>
+          <option value="">Experience Level?</option>
+          <option>Beginner</option>
+          <option>Intermediate</option>
+          <option>Advanced</option>
+        </select>
+
+        <textarea placeholder="Additonal Notes:" rows="4" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <a href="privacypolicy.html" style="color: rgb(0, 0, 0); text-decoration: underline;">
+        Privacy Policy © <span id="year"></span>
+      </a>
+    </p>
+    <p>Cornerstone Foundation Group. Established 2026.</p>
+  </footer>
+
+  <script>
+    window.onload = function () {
+      const year = new Date().getFullYear();
+      const el = document.getElementById("year");
+      if (el) el.textContent = year;
+    };
+    function toggleDropdown(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  document.querySelector('.dropdown').classList.toggle('active');
+}
+
+document.addEventListener('click', function () {
+  document.querySelector('.dropdown').classList.remove('active');
+});
+
+  </script>
+
+</body>
+</html>

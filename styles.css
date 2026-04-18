@@ -1,0 +1,362 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Tahoma, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding-bottom: 100px;
+}
+
+header {
+  width: 100%;
+  height: 100px;
+  background-color: #000000;
+  border-bottom: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.logo {
+  max-height: 100px;
+  width: auto;
+  height: auto;
+}
+
+.agent-login-btn {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  background-color: #c0c0c0;
+  color: black;
+  text-decoration: none;
+  padding: 8px 14px;
+  border: 2px solid #808080;
+  box-shadow: 3px 3px 0px #808080;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.agent-login-btn:active {
+  box-shadow: 1px 1px 0px #c0c0c0;
+  transform: translateY(-50%) translate(2px, 2px);
+}
+
+nav {
+  width: 100%;
+  background-color: #d3d3d3;
+  border-bottom: 2px solid black;
+}
+
+.nav-container {
+  width: 100%;
+  display: flex;
+}
+
+.nav-btn {
+  flex: 1;
+  text-align: center;
+  background-color: #c0c0c0;
+  border: 2px solid #808080;
+  padding: 10px 0;
+  text-decoration: none;
+  color: black;
+  box-shadow: 3px 3px 0px #808080;
+  font-family: Arial, sans-serif;
+  transition: background-color 0.1s;
+}
+
+.nav-btn:hover {
+  background-color: #b8b8b8;
+}
+
+.nav-btn:active {
+  box-shadow: 1px 1px 0px #808080;
+  transform: translate(2px, 2px);
+}
+
+footer {
+  width: 100%;
+  height: 70px;
+  background-color: #c0c0c0;
+  border-top: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+footer p {
+  margin: 0;
+  line-height: 1.2;
+}
+
+.video-container {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 15px;
+  background-color: #ffffff;
+  border: 2px solid black;
+  box-shadow: 6px 6px 0px #808080;
+}
+
+.video-container video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.form-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 2px solid black;
+  box-shadow: 6px 6px 0px #808080;
+}
+
+.form-container h2 {
+  margin-top: 0;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-container input,
+.form-container select,
+.form-container textarea {
+  padding: 10px;
+  border: 2px solid #808080;
+  font-family: Tahoma, sans-serif;
+}
+
+.form-container button {
+  background-color: #c0c0c0;
+  border: 2px solid #808080;
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px #808080;
+}
+
+.form-container button:active {
+  box-shadow: 1px 1px 0px #808080;
+  transform: translate(2px, 2px);
+}
+
+.privacy-page main h1 {
+  text-decoration: underline;
+}
+
+.privacy-page main {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 80px;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  text-align: center;
+  line-height: 1.8;
+  font-size: 18px;
+}
+
+.privacy-page main p {
+  margin-bottom: 50px;
+}
+
+a, p, h1, h2, h3, h4, h5, h6, span, div {
+  color: #fff;
+}
+
+.privacy-page,
+.privacy-page a,
+.privacy-page p,
+.privacy-page h1,
+.privacy-page h2,
+.privacy-page h3,
+.privacy-page h4,
+.privacy-page h5,
+.privacy-page h6,
+.privacy-page span,
+.privacy-page div {
+  color: #000;
+}
+
+footer, footer p, footer a, footer span {
+  color: #000;
+}
+
+footer a {
+  color: #000;
+}
+
+.return-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #c0c0c0;
+  color: #000;
+  text-decoration: none;
+  padding: 6px 12px;
+  border: 2px solid #808080;
+  box-shadow: 3px 3px 0px #808080;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+
+.return-btn:active {
+  box-shadow: 1px 1px 0px #808080;
+  transform: translate(2px, 2px);
+}
+
+.form-container textarea {
+  resize: none;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 710px);
+  gap: 70px;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.big-btn {
+  width: 710px;
+  height: 50px;
+  background-color: #c0c0c0;
+  border: 3px solid #808080;
+  box-shadow: 5px 5px 0px #808080;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: underline;
+  color: #000;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 25px;
+}
+
+.big-btn:active {
+  box-shadow: 2px 2px 0px #808080;
+  transform: translate(3px, 3px);
+}
+
+.dropdown {
+  position: relative;
+  flex: 1;
+  display: flex;
+}
+
+.dropbtn {
+  all: unset;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.dropdown .nav-btn {
+  width: 100%;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #c0c0c0;
+  z-index: 1000;
+  border: 2px solid #808080;
+  box-shadow: 3px 3px 0px #808080;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px;
+  color: #000;
+  text-decoration: none;
+  background-color: #c0c0c0;
+  border-top: 1px solid #808080;
+}
+
+.dropdown-content a:hover {
+  background-color: #b8b8b8;
+}
+
+.dropdown.active .dropdown-content {
+  display: block;
+}
+
+.insurance-form {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 40px;
+}
+
+.insurance-form .form-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.insurance-form .form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.insurance-form,
+.insurance-form label,
+.insurance-form input,
+.insurance-form select,
+.insurance-form h2,
+.insurance-form h3 {
+  color: #000;
+}
+
+.insurance-form h3 {
+  margin-top: 25px;
+  border-bottom: 2px solid #000;
+  padding-bottom: 5px;
+}
+
+.insurance-form button[type="submit"] {
+  display: block;
+  margin: 30px auto 0 auto;
+}
+
+.form-disclaimer {
+  max-width: 1200px;
+  margin: 40px auto 10px auto;
+  padding: 5px 20px;
+  font-size: 14px;
+  color: #000;
+  background: #f2f2f2;
+  border-left: 4px solid #000;
+}
+
+.form-disclaimer p {
+  margin: 0;
+  color: #000;
+}
+
+button,
+a,
+.nav-btn,
+.big-btn,
+[onclick] {
+  cursor: pointer;
+}

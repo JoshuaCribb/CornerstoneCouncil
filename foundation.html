@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cornerstone</title>
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <header>
+    <img src="assets/logo.png" alt="Cornerstone Logo" class="logo">
+  </header>
+
+<nav>
+    <div class="nav-container">
+      <a href="index.html" class="nav-btn">Home</a>
+      <a href="foundation.html" class="nav-btn">Foundation</a>
+      <a href="#" class="nav-btn">Our Mission</a>
+      <a href="#" class="nav-btn">Credibility</a>
+      <a href="#" class="nav-btn">Specialties</a>
+      <div class="dropdown">
+  <a href="#" class="nav-btn" onclick="toggleDropdown(event)">
+    Consulting
+  </a>
+  <div class="dropdown-content" id="consultingMenu">
+    <a href="demoform.html">Strategy Consultation</a>
+    <a href="https://calendly.com/tyreseconsulting/credit-strategy" target="_blank">Credit Strategy Consultation</a>
+  </div>
+</div>
+      <a href="careers.html" class="nav-btn">Careers</a>
+    </div>
+  </nav>
+
+  <main class="content">
+    
+
+  </main>
+
+<footer>
+  <p>
+    <a href="privacypolicy.html" style="color: rgb(0, 0, 0); text-decoration: underline;">
+      Privacy Policy © <span id="year"></span>
+    </a>
+  </p>
+  <p>Cornerstone Foundation Group. Established 2026.</p>
+</footer>
+
+<script>
+  window.onload = function () {
+    const year = new Date().getFullYear();
+    const el = document.getElementById("year");
+    if (el) el.textContent = year;
+  };
+ 
+function toggleDropdown(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  document.querySelector('.dropdown').classList.toggle('active');
+}
+
+document.addEventListener('click', function () {
+  document.querySelector('.dropdown').classList.remove('active');
+});
+
+</script>
+
+</body>
+</html>

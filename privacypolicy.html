@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cornerstone</title>
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="privacy-page">
+
+  <header>
+    <img src="assets/logo.png" alt="Cornerstone Logo" class="logo">
+  </header>
+
+<nav>
+    <div class="nav-container">
+      <a href="index.html" class="nav-btn">Home</a>
+      <a href="foundation.html" class="nav-btn">Foundation</a>
+      <a href="#" class="nav-btn">Our Mission</a>
+      <a href="#" class="nav-btn">Credibility</a>
+      <a href="#" class="nav-btn">Specialties</a>
+      <div class="dropdown">
+  <a href="#" class="nav-btn" onclick="toggleDropdown(event)">
+    Consulting
+  </a>
+  <div class="dropdown-content" id="consultingMenu">
+    <a href="demoform.html">Strategy Consultation</a>
+    <a href="https://calendly.com/tyreseconsulting/credit-strategy" target="_blank">Credit Strategy Consultation</a>
+  </div>
+</div>
+      <a href="careers.html" class="nav-btn">Careers</a>
+    </div>
+  </nav>
+
+  <main>
+    <h1>Privacy Policy <span id="year"></span></h1>
+
+    <p>This Privacy Policy outlines how Cornerstone Foundation Group operates this website and handles data related to its visitors and users.</p>
+
+    <p>When you access this site, certain technical data may be collected automatically, including device type, browser version, IP address, and general usage patterns across pages.</p>
+
+    <p>This information is primarily used for maintaining site stability, monitoring performance, identifying errors, and improving overall user experience.</p>
+
+    <p>We may utilize third-party services for hosting, analytics, and infrastructure support. These providers may process limited data necessary to deliver their services effectively.</p>
+
+    <p>Interaction with the website may involve standard web technologies such as cookies or similar tracking methods to help maintain session behavior and measure engagement.</p>
+
+    <p>Any data collected is used in an aggregated or technical form and is not intended to personally identify individual users through this website alone.</p>
+
+    <p>External tools or embedded services linked from this website may operate under their own privacy practices and policies, which are separate from this site.</p>
+
+    <p>Security measures are implemented to help protect the integrity of the website and the limited technical data processed through its systems.</p>
+
+    <p>This Privacy Policy may be updated periodically to reflect changes in functionality, infrastructure, or regulatory considerations affecting the website.</p>
+
+    <p>Continued use of the website after updates constitutes acknowledgment of the revised policy as displayed on this page.</p>
+
+    <p>-Cornerstone Council</p>
+
+  </main>
+
+  <footer>
+    <p>
+      <a href="privacypolicy.html" style="color: rgb(0, 0, 0); text-decoration: underline;">
+        Privacy Policy © <span id="year2"></span>
+      </a>
+    </p>
+    <p>Cornerstone Foundation Group. Established 2026.</p>
+  </footer>
+
+  <script>
+    const year = new Date().getFullYear();
+    document.getElementById("year").textContent = year;
+    document.getElementById("year2").textContent = year;
+  </script>
+
+</body>
+</html>

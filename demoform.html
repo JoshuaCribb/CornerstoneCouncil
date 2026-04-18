@@ -1,0 +1,305 @@
+<!DOCTYPE html> 
+<html>
+<head>
+  <title>Cornerstone</title>
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <header>
+    <img src="assets/logo.png" alt="Cornerstone Logo" class="logo">
+  </header>
+
+<nav>
+    <div class="nav-container">
+      <a href="index.html" class="nav-btn">Home</a>
+      <a href="#" class="nav-btn">Foundation</a>
+      <a href="#" class="nav-btn">Our Mission</a>
+      <a href="#" class="nav-btn">Credibility</a>
+      <a href="#" class="nav-btn">Specialties</a>
+      <div class="dropdown">
+  <a href="#" class="nav-btn" onclick="toggleDropdown(event)">
+    Consulting
+  </a>
+  <div class="dropdown-content" id="consultingMenu">
+    <a href="demoform.html">Strategy Consultation</a>
+    <a href="https://calendly.com/tyreseconsulting/credit-strategy" target="_blank">Credit Strategy Consultation</a>
+  </div>
+</div>
+      <a href="careers.html" class="nav-btn">Careers</a>
+    </div>
+  </nav>
+
+  <main class="content">
+    <div class="form-disclaimer">
+      <p>
+        *All information submitted through this form is securely received and reviewed by a trusted and licensed member of Cornerstone Council who has provided background checks, fingerprints, aswell as legal documents and certifications regarding their licensing as a broker and legal documents as an American Citizen.
+        All information and data provided through any form to Cornerstone Council will not be under any circumstances, tampered with, leaked, sold, or used for ANY unauthorized purposes whatsoever as punishable by law. By continuing you agree to recieve call or text from one of our trusted Cornerstone specialists on the appointment date as set and onward. Thank you for choosing Cornerstone Council, it is our pleasure to bring and maximize value.*
+      </p>
+    </div>
+
+    <form class="form-container insurance-form">
+
+      <h2>Demo Form</h2>
+
+      <h3>Personal Information</h3>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" required>
+        </div>
+
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date of Birth</label>
+          <input type="date" required>
+        </div>
+
+        <div class="form-group">
+          <label>Gender</label>
+          <select>
+            <option></option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Health History?</label>
+          <select>
+            <option></option>
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Marital Status</label>
+          <select>
+            <option></option>
+            <option>Single</option>
+            <option>Married</option>
+            <option>Divorced</option>
+            <option>Widowed</option>
+          </select>
+        </div>
+      </div>
+
+     <h3>Contact Information</h3>
+
+<div class="form-row">
+  <div class="form-group">
+    <label>Best Date for Appointment</label>
+    <input type="date">
+  </div>
+
+  <div class="form-group">
+    <label>Best Time for Appointment</label>
+    <select>
+      <option></option>
+      <option>Morning</option>
+      <option>Afternoon</option>
+      <option>Evening</option>
+    </select>
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group">
+    <label>Phone Number</label>
+    <input type="tel">
+  </div>
+
+  <div class="form-group">
+    <label>Email Address</label>
+    <input type="email">
+  </div>
+</div>
+
+<div class="form-row">
+  <div class="form-group">
+    <label>State</label>
+    <input type="text">
+  </div>
+
+  <div class="form-group">
+    <label>Zip Code</label>
+    <input type="text">
+  </div>
+</div>
+
+      <h3>Health Information</h3>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Height (ft/in)</label>
+          <input type="text">
+        </div>
+
+        <div class="form-group">
+          <label>Weight (lbs)</label>
+          <input type="text">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Smoker?</label>
+          <select>
+            <option></option>
+            <option>No</option>
+            <option>Yes</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Primary Physician</label>
+          <input type="text">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Have you been hospitalized in the last 5 years?</label>
+          <select>
+            <option>No</option>
+            <option>Yes</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Do you have any chronic conditions?</label>
+          <select>
+            <option>No</option>
+            <option>Yes</option>
+          </select>
+        </div>
+      </div>
+
+      <h3>Employment Information</h3>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Occupation</label>
+          <input type="text">
+        </div>
+
+        <div class="form-group">
+          <label>Employer Name</label>
+          <input type="text">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Annual Income</label>
+          <select>
+            <option></option>
+            <option>Under $25,000</option>
+            <option>$25,000 - $50,000</option>
+            <option>$50,000 - $100,000</option>
+            <option>$100,000+</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Employment Status</label>
+          <select>
+            <option></option>
+            <option>Employed</option>
+            <option>Self-Employed</option>
+            <option>Unemployed</option>
+            <option>Retired</option>
+          </select>
+        </div>
+      </div>
+
+      <h3>Policy Details</h3>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Coverage Amount</label>
+          <input type="text">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Policy Type</label>
+        <select>
+          <option>Whole Life</option>
+          <option>Term Life</option>
+        </select>
+      </div>
+
+      <h3>Beneficiary Information</h3>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Beneficiary Name(s)</label>
+          <input type="text">
+        </div>
+
+        <div class="form-group">
+          <label>Relationship</label>
+          <input type="text">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Percentage (%)</label>
+          <input type="number">
+        </div>
+
+        <div class="form-group">
+          <label>Contingent Beneficiary (Optional)</label>
+          <input type="text">
+        </div>
+      </div>
+
+      <button type="submit">Submit Application</button>
+
+    </form>
+  </main>
+
+  <footer>
+    <p>
+      <a href="privacypolicy.html" style="color: rgb(0, 0, 0); text-decoration: underline;">
+        Privacy Policy © <span id="year"></span>
+      </a>
+    </p>
+    <p>Cornerstone Foundation Group. Established 2026.</p>
+  </footer>
+
+  <script>
+    window.onload = function () {
+      const year = new Date().getFullYear();
+      const el = document.getElementById("year");
+      if (el) el.textContent = year;
+    };
+
+    function toggleDropdown(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      document.querySelector('.dropdown').classList.toggle('active');
+    }
+
+    document.addEventListener('click', function () {
+      document.querySelector('.dropdown').classList.remove('active');
+    });
+  </script>
+
+</body>
+</html>
