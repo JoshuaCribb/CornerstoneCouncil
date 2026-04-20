@@ -4,150 +4,180 @@
   <title>Cornerstone</title>
   <link rel="icon" type="image/png" href="assets/icon.png">
   <link rel="stylesheet" href="styles.css">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+body {
+  margin: 0;
+  font-family: Tahoma, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #000;
+  color: #fff;
+}
+
+body.locked > *:not(.login-screen) {
+  filter: blur(25px);
+  pointer-events: none;
+  user-select: none;
+}
+
+main {
+  flex: 1;
+}
+
+header {
+  width: 100%;
+  height: 100px;
+  background-color: #000000;
+  border-bottom: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.logo {
+  max-height: 100px;
+  width: auto;
+  height: auto;
+}
+
+.login-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.login-box {
+  background-color: #c0c0c0;
+  padding: 30px;
+  border: 2px solid #808080;
+  box-shadow: 3px 3px 0px #808080;
+  text-align: center;
+  width: 300px;
+}
+
+.login-box h2 {
+  color: #000;
+  margin-top: 10px;
+}
+
+.login-box input {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #808080;
+  font-family: Tahoma, sans-serif;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #808080;
+  background-color: #c0c0c0;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px #808080;
+  font-family: Arial, sans-serif;
+  color: #000;
+}
+
+.login-box button:active {
+  box-shadow: 1px 1px 0px #808080;
+  transform: translate(2px, 2px);
+}
+
+.return-btn {
+  display: inline-block;
+  margin-top: 10px;
+  background-color: #c0c0c0;
+  color: #000;
+  text-decoration: none;
+  padding: 6px 12px;
+  border: 2px solid #808080;
+  box-shadow: 3px 3px 0px #808080;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+
+.return-btn:active {
+  box-shadow: 1px 1px 0px #808080;
+  transform: translate(2px, 2px);
+}
+
+footer {
+  width: 100%;
+  height: 70px;
+  background-color: #c0c0c0;
+  border-top: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+footer p {
+  margin: 0;
+  line-height: 1.2;
+}
+  </style>
 </head>
 
 <body class="locked">
 
-<div class="login-screen" id="loginScreen">
-  <div class="login-box">
-    <h2>Agent Login</h2>
-    <input type="password" id="passwordInput">
-    <button onclick="submitPassword()">Login</button>
-    <p id="loginError" style="color:red; display:none;">Incorrect password</p>
+  <div class="login-screen" id="loginScreen">
+    <div class="login-box">
+      <a href="careers.html" class="return-btn">Return</a>
+      <h2>Agent Login</h2>
+      <input type="password" id="passwordInput" placeholder="Enter password">
+      <button onclick="submitPassword()">Login</button>
+      <p id="loginError" style="color:red; display:none;">Incorrect password</p>
+    </div>
   </div>
-</div>
 
-<header>
-  <img src="assets/agentlogo.png" class="logo">
-</header>
+  <header>
+    <img src="assets/agentlogo.png" alt="Cornerstone Firm Logo" class="logo">
+  </header>
 
-<nav>
-  <div class="nav-container">
-    <a href="#" class="nav-btn">Incentives</a>
-    <a href="compensation.html" class="nav-btn">Compensation Guide</a>
-    <a href="resources.html" class="nav-btn">Resources</a>
-    <a href="onboarding.html" class="nav-btn">Onboarding</a>
-    <a href="index.html" class="nav-btn">Back to Home</a>
-  </div>
-</nav>
+  <nav>
+    <div class="nav-container">
+      <a href="#" class="nav-btn">Incentives</a>
+      <a href="compensation.html" class="nav-btn">Compensation Guide</a>
+      <a href="resources.html" class="nav-btn">Resources</a>
+      <a href="onboarding.html" class="nav-btn">Onboarding</a>
+      <a href="index.html" class="nav-btn">Back to Home</a>
+    </div>
+  </nav>
 
-<main class="content">
-
-  <div class="button-grid">
-    <div class="big-btn" id="scriptBtn">Scripts</div>
-    <div class="big-btn" id="scriptBtn">Coming Soon</div>
-    <div class="big-btn" id="trainingBtn">Cornerstone Trainings</div>
-    <div class="big-btn" id="bankBtn">Bank Transfer Forms</div>
-
-  </div>
+<main class="content" style="flex:1; background:#000; display:flex; flex-direction:column; align-items:center; padding:10px 10px; gap:20px;">
 
 </main>
 
-<div id="trainingDropdown" class="dropdown">
-  <a class="dropdown-item" href="training1.html" target="_blank">Training 1</a>
-  <a class="dropdown-item" href="training2.html" target="_blank">Training 2</a>
-  <a class="dropdown-item" href="training3.html" target="_blank">Training 3</a>
+  <footer>
+    <p>
+      <a href="privacypolicy.html" style="color: rgb(0, 0, 0); text-decoration: underline;">
+        Privacy Policy © <span id="year"></span>
+      </a>
+    </p>
+    <p>Cornerstone Foundation Group. Established 2026.</p>
+  </footer>
 
-  <a class="dropdown-item" href="livedialing1.html" target="_blank">Live Dialing 1</a>
-  <a class="dropdown-item" href="livedialing2.html" target="_blank">Live Dialing 2</a>
-  <a class="dropdown-item" href="livedialing3.html" target="_blank">Live Dialing 3</a>
+  <script src="auth.js"></script>
 
-  <a class="dropdown-item" href="teammeeting1.html" target="_blank">Team Meeting 1</a>
-  <a class="dropdown-item" href="teammeeting2.html" target="_blank">Team Meeting 2</a>
-</div>
-
-<div id="scriptDropdown" class="dropdown">
-  <a class="dropdown-item" href="https://docs.google.com/document/d/1JaZ9fZJ6E7C0umkmfdtWIjimy7Wabyc7MDeZ8e65tW4/edit?tab=t.0" target="_blank">Script 1</a>
-  <a class="dropdown-item" href="https://docs.google.com/document/d/1JaZ9fZJ6E7C0umkmfdtWIjimy7Wabyc7MDeZ8e65tW4/edit?tab=t.0" target="_blank">Script 2</a>
-  <a class="dropdown-item" href="https://docs.google.com/document/d/1JaZ9fZJ6E7C0umkmfdtWIjimy7Wabyc7MDeZ8e65tW4/edit?tab=t.0" target="_blank">Script 3</a>
-</div>
-
-<div id="bankDropdown" class="dropdown">
-  <div class="dropdown-item" onclick="downloadPDF('form1.pdf')">Form 1</div>
-  <div class="dropdown-item" onclick="downloadPDF('form2.pdf')">Form 2</div>
-  <div class="dropdown-item" onclick="downloadPDF('form3.pdf')">Form 3</div>
-  <div class="dropdown-item" onclick="downloadPDF('form4.pdf')">Form 4</div>
-  <div class="dropdown-item" onclick="downloadPDF('form5.pdf')">Form 5</div>
-</div>
-
-<footer>
-  <p>
-    <a href="privacypolicy.html" style="color:#000; text-decoration:underline;" target="_blank">
-      Privacy Policy © <span id="year"></span>
-    </a>
-  </p>
-  <p>Cornerstone Foundation Group. Established 2026.</p>
-</footer>
-
-<script src="auth.js"></script>
-
-<script>
-document.getElementById("year").textContent = new Date().getFullYear();
-
-function downloadPDF(file) {
-  const a = document.createElement("a");
-  a.href = "assets/" + file;
-  a.download = file;
-  a.click();
-}
-
-function hideAll() {
-  document.querySelectorAll(".dropdown").forEach(d => {
-    d.style.display = "none";
-  });
-}
-
-function toggle(btnId, dropdownId) {
-  const btn = document.getElementById(btnId);
-  const dd = document.getElementById(dropdownId);
-
-  const r = btn.getBoundingClientRect();
-  const open = dd.style.display === "block";
-
-  hideAll();
-
-  if (!open) {
-    dd.style.position = "absolute";
-    dd.style.left = r.left + "px";
-    dd.style.top = r.bottom + "px";
-    dd.style.width = r.width + "px";
-    dd.style.display = "block";
-  }
-}
-
-document.getElementById("trainingBtn").onclick = () => toggle("trainingBtn", "trainingDropdown");
-document.getElementById("scriptBtn").onclick = () => toggle("scriptBtn", "scriptDropdown");
-document.getElementById("bankBtn").onclick = () => toggle("bankBtn", "bankDropdown");
-
-document.addEventListener("click", (e) => {
-  if (!e.target.closest(".big-btn") && !e.target.closest(".dropdown")) {
-    hideAll();
-  }
-});
-</script>
-
-<style>
-.dropdown {
-  display: none;
-  background: #c0c0c0;
-  border: 2px solid #808080;
-  box-shadow: 3px 3px 0px #808080;
-  z-index: 9999;
-}
-
-.dropdown-item {
-  display: block;
-  padding: 10px;
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.dropdown-item:hover {
-  text-decoration: underline;
-}
-</style>
+  <script>
+    window.onload = function () {
+      document.getElementById("year").textContent = new Date().getFullYear();
+      document.getElementById("passwordInput").value = "";
+      requireAuth();
+    };
+  </script>
 
 </body>
 </html>
