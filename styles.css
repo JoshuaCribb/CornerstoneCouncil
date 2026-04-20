@@ -2,6 +2,7 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: Tahoma, sans-serif;
+  overflow-x: hidden;
 }
 
 body {
@@ -359,4 +360,40 @@ a,
 .big-btn,
 [onclick] {
   cursor: pointer;
+}
+
+/* ===== MOBILE FIX ===== */
+@media (max-width: 768px) {
+
+  .button-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 30px 15px;
+  }
+
+  .big-btn {
+    width: 100%;
+    font-size: 18px;
+    height: 55px;
+  }
+
+  .nav-container {
+    flex-wrap: wrap;
+  }
+
+  .nav-btn {
+    flex: 1 1 50%;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .nav-btn {
+    flex: 1 1 100%;
+  }
+
+  .big-btn {
+    font-size: 16px;
+  }
 }
