@@ -1,79 +1,1225 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/icon32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/icon16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/iconapple.png">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>@swimorthink Store</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-<header>
-  <a href="index.html">
-    <img src="assets/logo.gif" alt="@swimorthink logo" class="logo" />
-  </a>
-
-  <div class="header-banner">
-    <a href="cart.html">Shopping Cart</a>
-  </div>
-
-  </div>
-</header>
-
-
-
- <main>
-    <a href="slipper.html" class="product-link">
-      <div class="product">
-        <div class="item">
-          <img
-            class="slideshow"
-            src="assets/blackslipper.png"
-            data-images="assets/blackslipper.png,assets/blueslipper.png"
-            alt="@swimorthink"
-          />
-        </div>
-        <p class="price">$21</p>
-      </div>
-    </a>
-
-  </main>
-
-<footer>
-  <p>© <span id="year"></span>. All Rights Reserved.</p>
-</footer>
-
- <script>
-  document.querySelectorAll(".slideshow").forEach(img => {
-    const images = img.dataset.images.split(",");
-
-    function randomize() {
-      const randomIndex = Math.floor(Math.random() * images.length);
-      img.src = images[randomIndex];
+  <title>Cornerstone Council</title>
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+ 
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+ 
+   
+    :root {
+      --gold:       #b89a5e;
+      --gold-light: #d4b57a;
+      --black:      #080808;
+      --off-black:  #111111;
+      --charcoal:   #1c1c1c;
+      --mid:        #2e2e2e;
+      --cream:      #f5f2ed;
+      --cream-dark: #edeae4;
+      --text-muted: #888;
+      --text-dim:   rgba(255,255,255,0.55);
     }
-
+ 
    
-    randomize();
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.85s cubic-bezier(.22,1,.36,1), transform 0.85s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left {
+      opacity: 0; transform: translateX(-32px);
+      transition: opacity 0.85s cubic-bezier(.22,1,.36,1), transform 0.85s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right {
+      opacity: 0; transform: translateX(32px);
+      transition: opacity 0.85s cubic-bezier(.22,1,.36,1), transform 0.85s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+ 
+    
+    .eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 16px;
+    }
+ 
+    .display-heading {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      font-weight: 600;
+      line-height: 1.1;
+      margin: 0 0 24px;
+      letter-spacing: -0.01em;
+    }
+ 
+    .body-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--text-muted);
+    }
+ 
+    .rule {
+      width: 40px; height: 1px;
+      background: var(--gold);
+      margin-bottom: 28px;
+    }
+ 
+    .anchor-btn {
+      display: inline-block;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 13px 30px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      margin-top: 32px;
+    }
+    .anchor-btn.outlined {
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+    .anchor-btn.outlined:hover {
+      background: var(--gold);
+      color: #000;
+    }
+    .anchor-btn.outlined-dark {
+      border: 1px solid #222;
+      color: #111;
+      background: transparent;
+    }
+    .anchor-btn.outlined-dark:hover {
+      background: #111;
+      color: #fff;
+    }
+    .anchor-btn.filled-dark {
+      border: 1px solid #111;
+      color: #fff;
+      background: #111;
+    }
+    .anchor-btn.filled-dark:hover {
+      background: #222;
+    }
+    .anchor-btn.filled-gold {
+      border: 1px solid var(--gold);
+      color: #000;
+      background: var(--gold);
+    }
+    .anchor-btn.filled-gold:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+    }
+ 
+    /* ════════════════════════════════════════
+       HERO
+    ════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 170px);
+      min-height: 560px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+    }
+ 
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1900&q=85')
+        center 30% / cover no-repeat;
+      transform: scale(1.04);
+      animation: subtleZoom 20s ease-in-out infinite alternate;
+    }
+    @keyframes subtleZoom {
+      from { transform: scale(1.04); }
+      to   { transform: scale(1.00); }
+    }
+ 
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(5,5,5,0.88) 0%,
+        rgba(5,5,5,0.55) 55%,
+        rgba(5,5,5,0.15) 100%
+      );
+    }
+    .hero-overlay-bottom {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,8,8,0.7) 0%, transparent 50%);
+    }
+ 
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 80px 80px;
+      max-width: 760px;
+    }
+ 
+    .hero-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .hero-label::before {
+      content: '';
+      width: 36px; height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+ 
+    .hero-headline {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.05;
+      margin: 0 0 28px;
+      letter-spacing: -0.02em;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--gold);
+    }
+ 
+    .hero-descriptor {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.85;
+      max-width: 520px;
+      margin: 0 0 40px;
+    }
+ 
+    .hero-cta-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+ 
+    .hero-scroll {
+      position: absolute;
+      right: 48px; bottom: 48px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-scroll span {
+      font-family: 'Inter', sans-serif;
+      font-size: 9px; letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      writing-mode: vertical-lr;
+    }
+    .scroll-line {
+      width: 1px; height: 60px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+      animation: scrollDrop 2s ease-in-out infinite;
+    }
+    @keyframes scrollDrop {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      50%  { transform: scaleY(1); transform-origin: top; }
+      51%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+ 
+    /* ════════════════════════════════════════
+       IDENTITY BAR
+    ════════════════════════════════════════ */
+    .identity-bar {
+      background: var(--off-black);
+      border-top: 1px solid #1e1e1e;
+      border-bottom: 1px solid #1e1e1e;
+      padding: 22px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .identity-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex: 1;
+      min-width: 180px;
+    }
+    .identity-item + .identity-item {
+      border-left: 1px solid #2a2a2a;
+      padding-left: 28px;
+    }
+    .identity-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .identity-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.5;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .identity-label strong {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0;
+      text-transform: none;
+      margin-bottom: 2px;
+    }
+ 
+    /* ════════════════════════════════════════
+       FOUNDATION (CHARITY)
+    ════════════════════════════════════════ */
+    .foundation-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 580px;
+    }
+    .foundation-visual {
+      position: relative;
+      overflow: hidden;
+    }
+    .foundation-visual img,
+    .foundation-visual-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      background: url('assets/foundation1.png') center / cover no-repeat;
+    }
+    .foundation-visual::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, transparent 60%, var(--cream) 100%);
+    }
+    .foundation-text {
+      background: var(--cream);
+      padding: 90px 70px 90px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .foundation-text .display-heading { color: var(--off-black); }
+ 
+    .giving-strip {
+      margin-top: 36px;
+      padding: 24px 28px;
+      background: var(--off-black);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .giving-pct {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .giving-desc {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+    }
+    .giving-desc strong {
+      display: block;
+      color: #fff;
+      font-weight: 500;
+      font-size: 0.88rem;
+      margin-bottom: 4px;
+    }
+ 
+    /* ════════════════════════════════════════
+       MISSION
+    ════════════════════════════════════════ */
+    .mission-section {
+      position: relative;
+      background: var(--off-black);
+      padding: 120px 80px;
+      overflow: hidden;
+    }
+    .mission-section::before {
+      content: 'COUNCIL';
+      position: absolute;
+      right: -20px; top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18vw;
+      font-weight: 700;
+      color: rgba(255,255,255,0.02);
+      line-height: 1;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .mission-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 100px;
+      align-items: start;
+    }
+    .mission-left .display-heading { color: #fff; }
+    .mission-right {
+      padding-top: 16px;
+    }
+    .mission-pillar {
+      padding: 28px 0;
+      border-bottom: 1px solid #1e1e1e;
+    }
+    .mission-pillar:first-child { border-top: 1px solid #1e1e1e; }
+    .mission-pillar h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #fff;
+      margin: 0 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .mission-pillar h4::before {
+      content: '';
+      width: 20px; height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .mission-pillar p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--text-dim);
+      line-height: 1.85;
+      margin: 0;
+      padding-left: 32px;
+    }
+ 
+    /* ════════════════════════════════════════
+       CREDIBILITY
+    ════════════════════════════════════════ */
+    .credibility-section {
+      background: var(--cream);
+      padding: 120px 80px;
+    }
+    .credibility-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .credibility-top {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: start;
+      margin-bottom: 70px;
+    }
+    .credibility-top .display-heading { color: var(--off-black); }
+    .credibility-statement {
+      padding-top: 8px;
+    }
+    .credibility-statement p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      color: #555;
+      line-height: 1.9;
+      margin: 0 0 18px;
+    }
+    .credential-tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+    .credential-tag {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #333;
+      padding: 8px 16px;
+      border: 1px solid #ccc;
+    }
+    .proof-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: #ddd;
+      border: 1px solid #ddd;
+    }
+    .proof-card {
+      background: var(--cream-dark);
+      padding: 36px 30px;
+      text-align: center;
+    }
+    .proof-card-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 600;
+      color: var(--off-black);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .proof-card-num sup {
+      font-size: 1.2rem;
+      color: var(--gold);
+      vertical-align: super;
+    }
+    .proof-card-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #888;
+    }
+ 
+    /* ════════════════════════════════════════
+       SPECIALTIES
+    ════════════════════════════════════════ */
+    .specialties-section {
+      background: var(--black);
+      padding: 120px 80px;
+    }
+    .specialties-header {
+      max-width: 1100px;
+      margin: 0 auto 64px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: end;
+    }
+    .specialties-header .display-heading { color: #fff; margin-bottom: 0; }
+    .specialties-header p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--text-dim);
+      line-height: 1.9;
+      margin: 0;
+    }
+    .specialties-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: #1e1e1e;
+      border: 1px solid #1e1e1e;
+    }
+    .specialty-tile {
+      background: var(--off-black);
+      padding: 44px 36px;
+      transition: background 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .specialty-tile::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      transition: width 0.35s ease;
+    }
+    .specialty-tile:hover { background: #161616; }
+    .specialty-tile:hover::after { width: 100%; }
+    .tile-index {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      color: var(--gold);
+      opacity: 0.6;
+      margin-bottom: 28px;
+      display: block;
+    }
+    .specialty-tile h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #fff;
+      margin: 0 0 14px;
+    }
+    .specialty-tile p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--text-dim);
+      line-height: 1.8;
+      margin: 0;
+    }
+ 
+    /* ════════════════════════════════════════
+       CONSULTING
+    ════════════════════════════════════════ */
+    .consulting-section {
+      background: var(--cream);
+      padding: 120px 80px;
+    }
+    .consulting-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .consulting-left .display-heading { color: var(--off-black); }
+    .consulting-right { padding-top: 8px; }
+ 
+    .consult-option {
+      padding: 32px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .consult-option:first-child { border-top: 1px solid #ddd; }
+    .consult-option-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .consult-option h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--off-black);
+      margin: 0 0 12px;
+    }
+    .consult-option p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: #666;
+      line-height: 1.85;
+      margin: 0 0 18px;
+    }
+    .consult-option a {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--off-black);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+    .consult-option a:hover { color: var(--gold); }
+    .consult-option a::after { content: '→'; font-size: 12px; }
+ 
+    /* ════════════════════════════════════════
+       CAREERS
+    ════════════════════════════════════════ */
+    .careers-section {
+      position: relative;
+      background: var(--off-black);
+      padding: 120px 80px;
+      overflow: hidden;
+    }
+    .careers-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+    }
+    .careers-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .careers-left .display-heading { color: #fff; }
+    .careers-left p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.93rem;
+      font-weight: 300;
+      color: var(--text-dim);
+      line-height: 1.9;
+      margin: 0 0 16px;
+    }
+    .careers-right {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .career-value {
+      background: var(--charcoal);
+      padding: 26px 30px;
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      transition: background 0.2s;
+    }
+    .career-value:hover { background: #222; }
+    .career-value-icon {
+      width: 32px; height: 32px; flex-shrink: 0;
+      border: 1px solid #2e2e2e;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 2px;
+    }
+    .career-value-icon svg { width: 14px; height: 14px; }
+    .career-value h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #fff;
+      margin: 0 0 6px;
+    }
+    .career-value p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin: 0;
+    }
+ 
+    /* ════════════════════════════════════════
+       CLOSING STATEMENT
+    ════════════════════════════════════════ */
+    .closing-section {
+      background: var(--black);
+      padding: 100px 80px;
+      text-align: center;
+      border-top: 1px solid #1a1a1a;
+    }
+    .closing-section blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3.2vw, 2.8rem);
+      font-style: italic;
+      font-weight: 400;
+      color: rgba(255,255,255,0.85);
+      max-width: 800px;
+      margin: 0 auto 48px;
+      line-height: 1.4;
+    }
+    .closing-section blockquote em { color: var(--gold); font-style: normal; }
+    .closing-cta-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+ 
+    /* ════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════ */
+    @media (max-width: 960px) {
+      .hero-content { padding: 0 40px 60px; }
+      .foundation-section { grid-template-columns: 1fr; }
+      .foundation-visual { min-height: 300px; position: relative; }
+      .foundation-visual-bg { position: absolute; }
+      .mission-inner { grid-template-columns: 1fr; gap: 50px; }
+      .credibility-top { grid-template-columns: 1fr; gap: 40px; }
+      .proof-row { grid-template-columns: 1fr 1fr; }
+      .specialties-header { grid-template-columns: 1fr; gap: 24px; }
+      .specialties-grid { grid-template-columns: 1fr 1fr; }
+      .consulting-inner { grid-template-columns: 1fr; gap: 50px; }
+      .careers-inner { grid-template-columns: 1fr; gap: 50px; }
+      .identity-bar { padding: 20px 30px; }
+      .mission-section,
+      .credibility-section,
+      .specialties-section,
+      .consulting-section,
+      .careers-section { padding: 80px 40px; }
+    }
+ 
+    @media (max-width: 600px) {
+      .hero { min-height: 480px; }
+      .hero-content { padding: 0 24px 48px; }
+      .hero-scroll { display: none; }
+      .specialties-grid { grid-template-columns: 1fr; }
+      .proof-row { grid-template-columns: 1fr 1fr; }
+      .mission-section,
+      .credibility-section,
+      .specialties-section,
+      .consulting-section,
+      .careers-section,
+      .closing-section { padding: 70px 24px; }
+      .foundation-text { padding: 60px 28px; }
+      .identity-item + .identity-item { border-left: none; padding-left: 0; }
+      .identity-bar { gap: 16px; }
+    }
+  </style>
+</head>
+ 
+<body>
+ 
+  <header>
+    <img src="assets/logo.png" alt="Cornerstone Logo" class="logo">
+  </header>
+ 
+ <nav>
+    <div class="nav-container">
+      <a href="index.html" class="nav-btn">Home</a>
+      <a href="foundation.html" class="nav-btn">Foundation</a>
+      <a href="#" class="nav-btn">Our Mission</a>
+      <a href="#" class="nav-btn">Credibility</a>
+      <a href="#" class="nav-btn">Specialties</a>
+      <div class="dropdown">
+  <a href="#" class="nav-btn" onclick="toggleDropdown(event)">
+    Consulting
+  </a>
+  <div class="dropdown-content" id="consultingMenu">
+    <a href="demoform.html">Strategy Consultation</a>
+    <a href="https://calendly.com/tyreseconsulting/credit-strategy" target="_blank">Credit Strategy Consultation</a>
+  </div>
+</div>
+      <a href="careers.html" class="nav-btn">Careers</a>
+    </div>
+  </nav>
+ 
+  <main class="content">
+ 
+    <!-- ══════════ HERO ══════════ -->
+    <section class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-overlay-bottom"></div>
+ 
+      <div class="hero-content">
+        <p class="hero-label">Cornerstone Council</p>
+        <h1 class="hero-headline">
+          Where Strategy<br>Becomes <em>Structure.</em>
+        </h1>
+        <p class="hero-descriptor">
+          We are a multi-disciplinary firm and council dedicated to building the
+          financial architecture that sustains wealth, protects opportunity, and
+          creates measurable outcomes — across every dimension of your financial life.
+        </p>
+        <div class="hero-cta-row">
+          <a href="#mission" class="anchor-btn outlined">Our Approach</a>
+          <a href="#consulting" class="anchor-btn filled-gold">Work With Us</a>
+        </div>
+      </div>
+ 
+      <div class="hero-scroll">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+ 
+    <!-- ══════════ IDENTITY BAR ══════════ -->
+    <div class="identity-bar">
+      <div class="identity-item reveal">
+        <div>
+          <div class="identity-label"><strong>The Council</strong>A network of practitioners, An organization</div>
+        </div>
+      </div>
+      <div class="identity-item reveal">
+        <div>
+          <div class="identity-label"><strong>The Firm</strong>Strategic financial architecture and advisory</div>
+        </div>
+      </div>
+      <div class="identity-item reveal">
+        <div>
+          <div class="identity-label"><strong>The Foundation</strong>Community giving woven into every engagement</div>
+        </div>
+      </div>
+      <div class="identity-item reveal">
+        <div>
+          <div class="identity-label"><strong>The Mission</strong>Long-term positioning over short-term transaction</div>
+        </div>
+      </div>
+    </div>
 
-   
-    setInterval(randomize, 2000);
+    <!-- ══════════ MISSION ══════════ -->
+    <section id="mission" class="mission-section">
+      <div class="mission-inner">
+        <div class="mission-left reveal-left">
+          <span class="eyebrow">Our Mission</span>
+          <div class="rule"></div>
+          <h2 class="display-heading">
+            Value delivered<br>across every layer<br>of your<br><em style="color:var(--gold);">financial life.</em>
+          </h2>
+          <p class="body-text" style="margin-top: 20px;">
+            We do not approach a client's situation from a single angle. Cornerstone exists
+            to identify leverage points — structural, legal, and strategic — that most
+            practitioners overlook. Our work spans credit positioning, financial structuring,
+            protection architecture, and beyond.
+          </p>
+          <a href="#specialties" class="anchor-btn outlined" style="margin-top: 36px;">Our Areas of Focus</a>
+        </div>
+        <div class="mission-right reveal-right">
+          <div class="mission-pillar">
+            <h4>Strategic Positioning</h4>
+            <p>[Filler] We assess your full financial posture and identify where structure, not product,
+            is the answer. Every recommendation is built from the ground up — not pulled from a shelf.</p>
+          </div>
+          <div class="mission-pillar">
+            <h4>Credit Architecture</h4>
+            <p>[Filler] Credit is infrastructure. We help clients understand, build, and leverage their
+            credit profile as a financial tool — not just a score — unlocking access and opportunity
+            that others leave on the table.</p>
+          </div>
+          <div class="mission-pillar">
+            <h4>Legitimate Loopholes</h4>
+            <p>[Filler] The tax code, financial system, and insurance markets contain advantages most
+            people never know to look for. We find them, explain them plainly, and help clients use
+            them responsibly and effectively.</p>
+          </div>
+          <div class="mission-pillar">
+            <h4>Long-Range Planning</h4>
+            <p>[Filler] We are not transactional. Every engagement is framed around where a client
+            is trying to be in five, ten, and twenty years — and the steps, in order, to get there.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    document.getElementById("year").textContent = new Date().getFullYear();
-      const isLoggedIn = localStorage.getItem("loggedIn") === "true";
-  const accountLink = document.getElementById("account-link");
-  
-  if (isLoggedIn) {
-    accountLink.textContent = "My Account";
-    accountLink.href = "account.html";
-  } else {
-    accountLink.textContent = "Login";
-    accountLink.href = "login.html";
-  }
-
-  });
-</script>
-
+      <!-- ══════════ FOUNDATION ══════════ -->
+    <section id="foundation" class="foundation-section">
+      <div class="foundation-visual">
+        <div class="foundation-visual-bg"></div>
+      </div>
+      <div class="foundation-text">
+        <div class="reveal-right">
+          <span class="eyebrow">The Foundation</span>
+          <div class="rule"></div>
+          <h2 class="display-heading">Profit with<br>Purpose.</h2>
+          <p class="body-text" style="color:#666;">
+            The Cornerstone Foundation is not a marketing appendage — it is a structural commitment.
+            A fixed percentage of every dollar earned flows directly into community-based initiatives,
+            financial literacy programs, and causes we vet and believe in. This is not charity as an
+            afterthought. It is accountability built into the model itself.
+          </p>
+          <p class="body-text" style="color:#666; margin-top: 14px;">
+            [Filler — add specific causes, partner organizations, or giving milestones here.]
+          </p>
+          <div class="giving-strip">
+            <div class="giving-pct">X%</div>
+            <div class="giving-desc">
+              <strong>Of All Earnings Committed to Giving</strong>
+              Every client engagement directly funds the communities we operate within.
+              Replace the percentage above with your actual figure.
+            </div>
+          </div>
+          <a href="#" class="anchor-btn outlined-dark">Learn About the Foundation</a>
+        </div>
+      </div>
+    </section>
+ 
+ 
+    <!-- ══════════ CREDIBILITY ══════════ -->
+    <section id="credibility" class="credibility-section">
+      <div class="credibility-inner">
+        <div class="credibility-top">
+          <div class="reveal-left">
+            <span class="eyebrow">Credibility</span>
+            <div class="rule"></div>
+            <h2 class="display-heading">
+              Built on results.<br>Not rhetoric.
+            </h2>
+          </div>
+          <div class="credibility-statement reveal-right">
+            <p>
+              [Filler] Cornerstone Council was not built on promises — it was built on a methodology
+              that produces repeatable outcomes. Our practitioners hold active licensure across multiple
+              disciplines, operate with full transparency, and are held to internal standards that
+              exceed regulatory minimums.
+            </p>
+            <p>
+              [Filler] Insert specific credentials, licensing bodies, carrier relationships, years of
+              combined experience, or notable client outcomes here. This section earns trust — treat it accordingly.
+            </p>
+            <div class="credential-tags">
+              <span class="credential-tag">Licensed Advisors</span>
+              <span class="credential-tag">Multi-State Operations</span>
+              <span class="credential-tag">Vetted Carrier Relationships</span>
+              <span class="credential-tag">Compliance-Driven</span>
+            </div>
+          </div>
+        </div>
+        <div class="proof-row reveal">
+          <div class="proof-card">
+            <div class="proof-card-num">500<sup>+</sup></div>
+            <div class="proof-card-label">Clients Advised</div>
+          </div>
+          <div class="proof-card">
+            <div class="proof-card-num">98<sup>%</sup></div>
+            <div class="proof-card-label">Retention Rate</div>
+          </div>
+          <div class="proof-card">
+            <div class="proof-card-num">10<sup>+</sup></div>
+            <div class="proof-card-label">Strategic Partners</div>
+          </div>
+          <div class="proof-card">
+            <div class="proof-card-num">$0</div>
+            <div class="proof-card-label">Hidden Fees. Ever.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- ══════════ SPECIALTIES ══════════ -->
+    <section id="specialties" class="specialties-section">
+      <div class="specialties-header">
+        <div class="reveal-left">
+          <span class="eyebrow">Specialties</span>
+          <div class="rule"></div>
+          <h2 class="display-heading" style="color:#fff;">
+            What we<br>actually do.
+          </h2>
+        </div>
+        <p class="reveal-right" style="padding-top:12px;">
+          [Filler] Our scope is deliberately broad — because financial wellbeing rarely fits into
+          one category. We operate across disciplines, bringing the right expertise to bear
+          on each dimension of a client's situation.
+        </p>
+      </div>
+      <div class="specialties-grid reveal">
+        <div class="specialty-tile">
+          <span class="tile-index">01</span>
+          <h3>Financial Structuring</h3>
+          <p>[Filler] How you hold, protect, and deploy assets matters as much as how much you have.
+          We build structures — entities, accounts, and strategies — that position clients for
+          compounding advantage.</p>
+        </div>
+        <div class="specialty-tile">
+          <span class="tile-index">02</span>
+          <h3>Credit Strategy</h3>
+          <p>[Filler] From profile analysis to strategic utilization, we treat credit as a lever —
+          not a liability. Clients leave with a clear, executable plan for optimizing their position.</p>
+        </div>
+        <div class="specialty-tile">
+          <span class="tile-index">03</span>
+          <h3>Protection Planning</h3>
+          <p>[Filler] Risk is part of every financial picture. We identify exposure, quantify it,
+          and recommend the most efficient vehicles to address it — without overbuilding or
+          overselling.</p>
+        </div>
+        <div class="specialty-tile">
+          <span class="tile-index">04</span>
+          <h3>Wealth Positioning</h3>
+          <p>[Filler] Long-term accumulation requires intentional architecture. We help clients
+          understand which vehicles to prioritize, in what order, and why — based on their
+          specific timeline and goals.</p>
+        </div>
+        <div class="specialty-tile">
+          <span class="tile-index">05</span>
+          <h3>Strategic Loopholes</h3>
+          <p>[Filler] The financial system rewards those who know how to navigate it. We surface
+          legal, legitimate advantages within the tax code, financial products, and regulatory
+          frameworks that most advisors do not address.</p>
+        </div>
+        <div class="specialty-tile">
+          <span class="tile-index">06</span>
+          <h3>Business Advisory</h3>
+          <p>[Filler] Business owners face compounding complexity. We advise on entity structure,
+          key-person exposure, business credit, and the financial decisions that separate
+          sustainable operations from fragile ones.</p>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- ══════════ CONSULTING ══════════ -->
+    <section id="consulting" class="consulting-section">
+      <div class="consulting-inner">
+        <div class="consulting-left reveal-left">
+          <span class="eyebrow">Consulting</span>
+          <div class="rule"></div>
+          <h2 class="display-heading" style="color:var(--off-black);">
+            A conversation<br>that changes<br>the calculation.
+          </h2>
+          <p class="body-text" style="color:#666;">
+            Every engagement begins with clarity. We do not lead with products — we lead with
+            questions, analysis, and a genuine assessment of where you stand and where you
+            could be. What follows is a roadmap, not a pitch.
+          </p>
+          <p class="body-text" style="color:#666; margin-top: 14px;">
+            [Filler] Add any intake process details, session length, format, or what clients
+            should expect from their first conversation with Cornerstone Council.
+          </p>
+        </div>
+        <div class="consulting-right reveal-right">
+          <div class="consult-option">
+            <span class="consult-option-label">Session One</span>
+            <h4>Strategy Consultation</h4>
+            <p>[Filler] A structured, comprehensive session covering your current financial position,
+            identified gaps, and a prioritized framework for moving forward. We walk away with
+            alignment — you walk away with direction.</p>
+            <a href="demoform.html">Schedule This Session</a>
+          </div>
+          <div class="consult-option">
+            <span class="consult-option-label">Session Two</span>
+            <h4>Credit Strategy Consultation</h4>
+            <p>[Filler] Focused entirely on your credit profile — where it is, where it needs to be,
+            and the specific steps to get there. Tactical, time-bound, and built around
+            your goals specifically.</p>
+            <a href="https://calendly.com/tyreseconsulting/credit-strategy" target="_blank">Book on Calendly</a>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- ══════════ CAREERS ══════════ -->
+    <section id="careers" class="careers-section">
+      <div class="careers-inner">
+        <div class="careers-left reveal-left">
+          <span class="eyebrow">Join the Council</span>
+          <div class="rule"></div>
+          <h2 class="display-heading" style="color:#fff;">
+            Built for those<br>who want to<br><em style="color:var(--gold);">actually build.</em>
+          </h2>
+          <p>
+            We are not a revolving door. We recruit practitioners who are serious about scale —
+            people who want to grow a book, develop mastery, and operate within a system
+            that was designed to support both from day one.
+          </p>
+          <p>
+            What we offer is not a job — it is a platform. Industry-leading contracts,
+            deliberate training, and access to a council of peers who hold each other to a
+            standard worth meeting.
+          </p>
+          <p>[Filler] Add any specific license requirements, onboarding details, or team culture notes.</p>
+          <a href="careers.html" class="anchor-btn outlined" style="margin-top:36px;">View Open Roles</a>
+        </div>
+        <div class="careers-right reveal-right">
+          <div class="career-value">
+            <div class="career-value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <h4>Contracts That Reflect Your Value</h4>
+              <p>[Filler] We do not negotiate compensation down. Our contracts are among the most
+              competitive in the space — because producers who perform deserve to be compensated
+              accordingly.</p>
+            </div>
+          </div>
+          <div class="career-value">
+            <div class="career-value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <div>
+              <h4>Training with Real Depth</h4>
+              <p>[Filler] Our onboarding is not a formality. New council members receive structured
+              training across products, strategy, and client communication — with ongoing development
+              built into the model.</p>
+            </div>
+          </div>
+          <div class="career-value">
+            <div class="career-value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+              <h4>A Network Worth Being Part Of</h4>
+              <p>[Filler] Cornerstone Council operates as exactly that — a council. The people you
+              work alongside are invested in your growth, not indifferent to it.</p>
+            </div>
+          </div>
+          <div class="career-value">
+            <div class="career-value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div>
+              <h4>Scalable Income Infrastructure</h4>
+              <p>[Filler] We help producers build books, not just books of business. Residual,
+              referral, and advancement structures are built into the model from the start.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- ══════════ CLOSING ══════════ -->
+    <section class="closing-section reveal">
+      <blockquote>
+        "The difference between a transaction and a transformation<br>
+        is <em>the quality of the strategy behind it.</em>"
+      </blockquote>
+      <div class="closing-cta-row">
+        <a href="#consulting" class="anchor-btn outlined">Begin a Consultation</a>
+        <a href="careers.html" class="anchor-btn filled-gold">Join the Council</a>
+      </div>
+    </section>
+ 
+  </main>
+ 
+  <footer>
+    <p>
+      <a href="privacypolicy.html" style="color: rgb(0, 0, 0); text-decoration: underline;">
+        Privacy Policy © <span id="year"></span>
+      </a>
+    </p>
+    <p>Cornerstone Foundation Group. Established 2026.</p>
+  </footer>
+ 
+  <script>
+    window.onload = function () {
+      const year = new Date().getFullYear();
+      const el = document.getElementById("year");
+      if (el) el.textContent = year;
+    };
+ 
+    function toggleDropdown(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      document.querySelector('.dropdown').classList.toggle('active');
+    }
+ 
+    document.addEventListener('click', function () {
+      document.querySelector('.dropdown').classList.remove('active');
+    });
+ 
+    // Scroll reveal — supports left, right, and center
+    const allReveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, 80);
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    allReveals.forEach(el => revealObserver.observe(el));
+  </script>
+ 
 </body>
 </html>
