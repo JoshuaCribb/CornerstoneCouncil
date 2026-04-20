@@ -11,11 +11,70 @@ body {
   flex-direction: column;
 }
 
+body.locked {
+  overflow: hidden;
+}
+
 main {
   flex: 1;
   padding-bottom: 100px;
 }
 
+/* ===== LOGIN SCREEN ===== */
+.login-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+.login-box {
+  background: #c0c0c0;
+  border: 2px solid #808080;
+  box-shadow: 5px 5px 0px #808080;
+  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-width: 260px;
+}
+
+.login-box h2 {
+  margin: 0;
+  color: #000;
+}
+
+.login-box input {
+  padding: 8px;
+  border: 2px solid #808080;
+  font-family: Tahoma, sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.login-box button {
+  background: #c0c0c0;
+  border: 2px solid #808080;
+  box-shadow: 3px 3px 0px #808080;
+  padding: 8px 20px;
+  cursor: pointer;
+  font-family: Tahoma, sans-serif;
+}
+
+.login-box button:active {
+  box-shadow: 1px 1px 0px #808080;
+  transform: translate(2px, 2px);
+}
+
+/* ===== HEADER ===== */
 header {
   width: 100%;
   height: 100px;
@@ -53,6 +112,7 @@ header {
   transform: translateY(-50%) translate(2px, 2px);
 }
 
+/* ===== NAV ===== */
 nav {
   width: 100%;
   background-color: #d3d3d3;
@@ -86,6 +146,7 @@ nav {
   transform: translate(2px, 2px);
 }
 
+/* ===== FOOTER ===== */
 footer {
   width: 100%;
   height: 70px;
@@ -103,6 +164,7 @@ footer p {
   line-height: 1.2;
 }
 
+/* ===== VIDEO ===== */
 .video-container {
   max-width: 1200px;
   margin: 60px auto;
@@ -118,6 +180,7 @@ footer p {
   display: block;
 }
 
+/* ===== FORMS ===== */
 .form-container {
   max-width: 700px;
   margin: 40px auto;
@@ -160,6 +223,11 @@ footer p {
   transform: translate(2px, 2px);
 }
 
+.form-container textarea {
+  resize: none;
+}
+
+/* ===== PRIVACY PAGE ===== */
 .privacy-page main h1 {
   text-decoration: underline;
 }
@@ -179,6 +247,7 @@ footer p {
   margin-bottom: 50px;
 }
 
+/* ===== COLORS ===== */
 a, p, h1, h2, h3, h4, h5, h6, span, div {
   color: #fff;
 }
@@ -205,6 +274,7 @@ footer a {
   color: #000;
 }
 
+/* ===== MISC BUTTONS ===== */
 .return-btn {
   position: absolute;
   top: 20px;
@@ -224,10 +294,7 @@ footer a {
   transform: translate(2px, 2px);
 }
 
-.form-container textarea {
-  resize: none;
-}
-
+/* ===== BUTTON GRID ===== */
 .button-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 710px));
@@ -252,6 +319,7 @@ footer a {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 25px;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .big-btn:active {
@@ -259,6 +327,7 @@ footer a {
   transform: translate(3px, 3px);
 }
 
+/* ===== DROPDOWNS ===== */
 .dropdown {
   position: relative;
   flex: 1;
@@ -304,6 +373,7 @@ footer a {
   display: block;
 }
 
+/* ===== INSURANCE FORM ===== */
 .insurance-form {
   max-width: 1000px;
   margin: 60px auto;
@@ -365,7 +435,7 @@ a,
   cursor: pointer;
 }
 
-/* ===== MOBILE FIX ===== */
+/* ===== MOBILE ===== */
 @media (max-width: 768px) {
 
   .button-grid {
@@ -383,22 +453,13 @@ a,
     box-sizing: border-box;
   }
 
-  .nav-container {
-    flex-wrap: wrap;
-  }
-
   .nav-btn {
-    flex: 1 1 50%;
-    font-size: 14px;
+    font-size: 11px;
+    padding: 8px 2px;
   }
 }
 
 @media (max-width: 480px) {
-
-  .nav-btn {
-    flex: 1 1 100%;
-  }
-
   .big-btn {
     font-size: 16px;
   }
