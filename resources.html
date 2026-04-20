@@ -4,6 +4,8 @@
   <title>Cornerstone</title>
   <link rel="icon" type="image/png" href="assets/icon.png">
   <link rel="stylesheet" href="styles.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body class="locked">
@@ -35,10 +37,9 @@
 
   <div class="button-grid">
     <div class="big-btn" id="scriptBtn">Scripts</div>
-    <div class="big-btn" id="scriptBtn">Coming Soon</div>
+    <div class="big-btn">Coming Soon</div>
     <div class="big-btn" id="trainingBtn">Cornerstone Trainings</div>
     <div class="big-btn" id="bankBtn">Bank Transfer Forms</div>
-
   </div>
 
 </main>
@@ -145,6 +146,42 @@ document.addEventListener("click", (e) => {
 
 .dropdown-item:hover {
   text-decoration: underline;
+}
+
+/* ===== MOBILE FIX ===== */
+@media (max-width: 768px) {
+
+  .button-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 30px 15px;
+  }
+
+  .big-btn {
+    width: 100%;
+    font-size: 18px;
+    height: 55px;
+  }
+
+  .nav-container {
+    flex-wrap: wrap;
+  }
+
+  .nav-btn {
+    flex: 1 1 50%;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .nav-btn {
+    flex: 1 1 100%;
+  }
+
+  .big-btn {
+    font-size: 16px;
+  }
 }
 </style>
 
