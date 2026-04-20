@@ -369,12 +369,15 @@ a,
     grid-template-columns: 1fr;
     gap: 20px;
     padding: 30px 15px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .big-btn {
     width: 100%;
     font-size: 18px;
     height: 55px;
+    box-sizing: border-box;
   }
 
   .nav-container {
