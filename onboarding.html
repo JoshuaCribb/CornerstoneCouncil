@@ -1,176 +1,777 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Cornerstone</title>
+  <title>Cornerstone — Agent Onboarding</title>
   <link rel="icon" type="image/png" href="assets/icon.png">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-body {
-  margin: 0;
-  font-family: Tahoma, sans-serif;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-color: #000;
-  color: #fff;
-}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-body.locked > *:not(.login-screen) {
-  filter: blur(25px);
-  pointer-events: none;
-  user-select: none;
-}
+    :root {
+      --gold: #c9ae7e;
+      --gold-dim: rgba(201,174,126,0.15);
+      --gold-glow: rgba(201,174,126,0.06);
+      --glass: rgba(255,255,255,0.035);
+      --glass-border: rgba(255,255,255,0.08);
+      --glass-top: rgba(255,255,255,0.06);
+      --text: #ede8df;
+      --text-muted: rgba(237,232,223,0.48);
+      --text-ghost: rgba(237,232,223,0.22);
+      --bg: #07090d;
+    }
 
-main {
-  flex: 1;
-}
+    html, body {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-header {
-  width: 100%;
-  height: 100px;
-  background-color: #000000;
-  border-bottom: 2px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+    }
 
-.logo {
-  max-height: 100px;
-  width: auto;
-  height: auto;
-}
+    body.locked > *:not(.login-screen) {
+      filter: blur(22px);
+      pointer-events: none;
+      user-select: none;
+    }
 
-.login-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
+    /* ── BACKGROUND ATMOSPHERE ── */
+    .bg-atmosphere {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
 
-.login-box {
-  background-color: #c0c0c0;
-  padding: 30px;
-  border: 2px solid #808080;
-  box-shadow: 3px 3px 0px #808080;
-  text-align: center;
-  width: 300px;
-}
+    .bg-atmosphere::before {
+      content: '';
+      position: absolute;
+      width: 900px; height: 900px;
+      top: -300px; left: -200px;
+      background: radial-gradient(circle, rgba(201,174,126,0.055) 0%, transparent 65%);
+      border-radius: 50%;
+    }
 
-.login-box h2 {
-  color: #000;
-  margin-top: 10px;
-}
+    .bg-atmosphere::after {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px;
+      bottom: -200px; right: -150px;
+      background: radial-gradient(circle, rgba(80,100,160,0.04) 0%, transparent 65%);
+      border-radius: 50%;
+    }
 
-.login-box input {
-  width: 90%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 2px solid #808080;
-  font-family: Tahoma, sans-serif;
-}
+    /* Grain overlay */
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.018;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
 
-.login-box button {
-  width: 100%;
-  padding: 10px;
-  border: 2px solid #808080;
-  background-color: #c0c0c0;
-  cursor: pointer;
-  box-shadow: 3px 3px 0px #808080;
-  font-family: Arial, sans-serif;
-  color: #000;
-}
+    /* ── LOGIN ── */
+    .login-screen {
+      position: fixed;
+      inset: 0;
+      background: rgba(7,9,13,0.88);
+      backdrop-filter: blur(24px) saturate(1.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
 
-.login-box button:active {
-  box-shadow: 1px 1px 0px #808080;
-  transform: translate(2px, 2px);
-}
+    .login-box {
+      position: relative;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 48px 42px 40px;
+      width: 330px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      backdrop-filter: blur(40px);
+    }
 
-.return-btn {
-  display: inline-block;
-  margin-top: 10px;
-  background-color: #c0c0c0;
-  color: #000;
-  text-decoration: none;
-  padding: 6px 12px;
-  border: 2px solid #808080;
-  box-shadow: 3px 3px 0px #808080;
-  font-family: Arial, sans-serif;
-  font-size: 13px;
-}
+    .login-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,174,126,0.55), transparent);
+    }
 
-.return-btn:active {
-  box-shadow: 1px 1px 0px #808080;
-  transform: translate(2px, 2px);
-}
+    .login-box h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 20px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
 
-footer {
-  width: 100%;
-  height: 70px;
-  background-color: #c0c0c0;
-  border-top: 2px solid black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-}
+    .login-box input {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text);
+      padding: 13px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.25s;
+    }
 
-footer p {
-  margin: 0;
-  line-height: 1.2;
-}
+    .login-box input::placeholder { color: var(--text-ghost); }
+    .login-box input:focus { border-color: rgba(201,174,126,0.45); }
+
+    .login-box button {
+      width: 100%;
+      background: rgba(201,174,126,0.1);
+      border: 1px solid rgba(201,174,126,0.32);
+      color: var(--gold);
+      padding: 13px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.22s, border-color 0.22s;
+    }
+
+    .login-box button:hover {
+      background: rgba(201,174,126,0.18);
+      border-color: rgba(201,174,126,0.55);
+    }
+
+    .login-return {
+      font-size: 11.5px;
+      color: var(--text-ghost);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+      margin-top: 4px;
+    }
+
+    .login-return:hover { color: var(--gold); }
+
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 88px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(7,9,13,0.75);
+      border-bottom: 1px solid rgba(255,255,255,0.055);
+      backdrop-filter: blur(20px);
+    }
+
+    .logo {
+      max-height: 72px;
+      width: auto;
+      height: auto;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      background: rgba(255,255,255,0.025);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(20px);
+    }
+
+    .nav-container {
+      display: flex;
+      width: 100%;
+    }
+
+    .nav-btn {
+      flex: 1;
+      text-align: center;
+      padding: 14px 8px;
+      text-decoration: none;
+      color: var(--text-muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-right: 1px solid rgba(255,255,255,0.055);
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-btn:last-child { border-right: none; }
+
+    .nav-btn:hover {
+      color: var(--gold);
+      background: rgba(201,174,126,0.04);
+    }
+
+    .nav-btn.active-page {
+      color: var(--gold);
+      border-bottom: 1px solid rgba(201,174,126,0.28);
+    }
+
+    /* ── MAIN ── */
+    main {
+      flex: 1;
+      position: relative;
+      z-index: 2;
+      padding: 80px 24px 100px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 640px;
+      margin: 0 auto 72px;
+      text-align: center;
+      animation: riseIn 0.9s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 22px;
+      padding: 5px 14px;
+      border: 1px solid rgba(201,174,126,0.22);
+      background: rgba(201,174,126,0.06);
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(38px, 6vw, 62px);
+      line-height: 1.12;
+      letter-spacing: 0.015em;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: rgba(237,232,223,0.65);
+    }
+
+    .hero p {
+      font-size: 14.5px;
+      line-height: 1.9;
+      color: var(--text-muted);
+      font-weight: 300;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .hero-rule {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin: 38px auto 0;
+      width: 200px;
+    }
+
+    .hero-rule span {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(201,174,126,0.3));
+    }
+
+    .hero-rule span:last-child {
+      background: linear-gradient(to left, transparent, rgba(201,174,126,0.3));
+    }
+
+    .hero-rule i {
+      font-style: normal;
+      color: rgba(201,174,126,0.45);
+      font-size: 10px;
+    }
+
+    /* ── STEPS ── */
+    .steps {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .step {
+      display: flex;
+      gap: 0;
+      position: relative;
+      animation: riseIn 0.7s cubic-bezier(0.22,1,0.36,1) both;
+    }
+
+    .step:nth-child(1)  { animation-delay: 0.08s; }
+    .step:nth-child(2)  { animation-delay: 0.14s; }
+    .step:nth-child(3)  { animation-delay: 0.20s; }
+    .step:nth-child(4)  { animation-delay: 0.26s; }
+    .step:nth-child(5)  { animation-delay: 0.32s; }
+    .step:nth-child(6)  { animation-delay: 0.38s; }
+    .step:nth-child(7)  { animation-delay: 0.44s; }
+
+    /* Left timeline track */
+    .step-track {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 64px;
+      flex-shrink: 0;
+      padding-top: 34px;
+    }
+
+    .step-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,174,126,0.3);
+      background: rgba(201,174,126,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      color: var(--gold);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .step:hover .step-dot {
+      background: rgba(201,174,126,0.12);
+      border-color: rgba(201,174,126,0.55);
+    }
+
+    .step-line {
+      width: 1px;
+      flex: 1;
+      min-height: 24px;
+      background: linear-gradient(to bottom, rgba(201,174,126,0.18), rgba(201,174,126,0.04));
+      margin-top: 8px;
+    }
+
+    .step:last-child .step-line {
+      display: none;
+    }
+
+    /* Card */
+    .step-card {
+      flex: 1;
+      margin: 16px 0 24px 0;
+      padding: 28px 30px 28px 26px;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(28px);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .step-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--glass-top), transparent);
+    }
+
+    .step:hover .step-card {
+      border-color: rgba(201,174,126,0.18);
+      transform: translateX(3px);
+    }
+
+    /* Subtle inner glow */
+    .step-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 0% 50%, rgba(201,174,126,0.03), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .step:hover .step-card::after { opacity: 1; }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .step-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.01em;
+    }
+
+    .badge {
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border: 1px solid rgba(201,174,126,0.3);
+      color: var(--gold);
+      background: rgba(201,174,126,0.07);
+    }
+
+    .step-body {
+      font-size: 13.5px;
+      line-height: 1.85;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    .step-body p { margin-bottom: 10px; }
+    .step-body p:last-child { margin-bottom: 0; }
+
+    /* List */
+    .item-list {
+      list-style: none;
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .item-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .item-list li::before {
+      content: '—';
+      color: rgba(201,174,126,0.4);
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    .item-list li strong { color: var(--text); font-weight: 500; }
+
+    .item-list li.optional { color: var(--text-ghost); }
+    .item-list li.optional::before { color: var(--text-ghost); }
+    .item-list li.optional strong { color: var(--text-ghost); }
+
+    /* Note */
+    .note {
+      margin-top: 16px;
+      padding: 13px 16px;
+      background: rgba(255,255,255,0.02);
+      border-left: 1px solid rgba(201,174,126,0.28);
+      font-size: 12.5px;
+      color: var(--text-ghost);
+      line-height: 1.7;
+    }
+
+    .note strong { color: rgba(201,174,126,0.7); font-weight: 400; }
+
+    /* Inner link */
+    .step-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      font-size: 11px;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      padding-bottom: 2px;
+      border-bottom: 1px solid rgba(201,174,126,0.25);
+      transition: border-color 0.2s;
+    }
+
+    .step-link:hover { border-color: var(--gold); }
+
+    .step-link svg {
+      width: 10px; height: 10px;
+      transition: transform 0.2s;
+    }
+
+    .step-link:hover svg { transform: translate(2px,-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 10;
+      padding: 22px 20px;
+      background: rgba(255,255,255,0.015);
+      border-top: 1px solid rgba(255,255,255,0.055);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
+    footer p {
+      font-size: 11.5px;
+      color: var(--text-ghost);
+      letter-spacing: 0.04em;
+    }
+
+    footer a {
+      color: var(--text-ghost);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--gold); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 580px) {
+      .step-track { width: 44px; }
+      .step-dot { width: 30px; height: 30px; font-size: 13px; }
+      .step-card { padding: 22px 18px; }
+      .nav-btn { font-size: 9.5px; padding: 12px 5px; }
+      main { padding: 60px 14px 80px; }
+      .hero { margin-bottom: 52px; }
+    }
   </style>
 </head>
 
 <body class="locked">
 
+  <div class="bg-atmosphere"></div>
+  <div class="grain"></div>
+
+  <!-- LOGIN -->
   <div class="login-screen" id="loginScreen">
     <div class="login-box">
-      <a href="careers.html" class="return-btn">Return</a>
-      <h2>Agent Login</h2>
-      <input type="password" id="passwordInput" placeholder="Enter password">
-      <button onclick="submitPassword()">Login</button>
-      <p id="loginError" style="color:red; display:none;">Incorrect password</p>
+      <h2>Agent Access</h2>
+      <input type="password" id="passwordInput" placeholder="Password">
+      <button onclick="submitPassword()">Continue</button>
+      <p id="loginError" style="color:#d97070;font-size:12px;display:none;">Incorrect password.</p>
+      <a href="careers.html" class="login-return">← Return to Careers</a>
     </div>
   </div>
 
   <header>
-    <img src="assets/agentlogo.png" alt="Cornerstone Firm Logo" class="logo">
+    <img src="assets/agentlogo.png" alt="Cornerstone" class="logo">
   </header>
 
   <nav>
     <div class="nav-container">
-      <a href="#" class="nav-btn">Incentives</a>
-      <a href="compensation.html" class="nav-btn">Compensation Guide</a>
       <a href="resources.html" class="nav-btn">Resources</a>
-      <a href="onboarding.html" class="nav-btn">Onboarding</a>
+      <a href="compensation.html" class="nav-btn">Compensation Guide</a>
+      <a href="https://www.cornerstoneaccount.com" class="nav-btn" target="_blank" rel="noopener noreferrer">Agent View</a>
+      <a href="onboarding.html" class="nav-btn active-page">Onboarding</a>
       <a href="index.html" class="nav-btn">Back to Home</a>
     </div>
   </nav>
 
-<main class="content" style="flex:1; background:#000; display:flex; flex-direction:column; align-items:center; padding:10px 10px; gap:20px;">
+  <main>
 
-</main>
+    <div class="hero">
+      <div class="eyebrow">Agent Onboarding</div>
+      <h1>Welcome to<br><em>Cornerstone Council</em></h1>
+      <p>
+        You are not just joining a company — you are building a business of your own,
+        one you can be genuinely proud of, while helping those around you reach their full potential.
+        Follow these steps in order and reach out to your upline along the way.
+      </p>
+      <div class="hero-rule">
+        <span></span>
+        <i>◆</i>
+        <span></span>
+      </div>
+    </div>
+
+    <div class="steps">
+
+      <!-- 1 -->
+      <div class="step">
+        <div class="step-track">
+          <div class="step-dot">1</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-title">Request Agent Portal Access</div>
+            <div class="badge">First Priority</div>
+          </div>
+          <div class="step-body">
+            <p>Contact your upline and request access to the Agent Portal. This is your central hub — leads, submissions, and firm-wide communications all live here. Do not skip or delay this step.</p>
+            <a href="https://www.cornerstoneaccount.com" target="_blank" rel="noopener noreferrer" class="step-link">
+              Open Agent Portal
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="step">
+        <div class="step-track">
+          <div class="step-dot">2</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-title">Join the Cornerstone Discord</div>
+            <div class="badge">First Priority</div>
+          </div>
+          <div class="step-body">
+            <p>
+              Request your Discord invite link from your upline. Discord is where the team operates — training calls, announcements, mentorship, and live support all run through it. Once in, introduce yourself and get familiar with the channels.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="step">
+        <div class="step-track">
+          <div class="step-dot">3</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-title">Submit Your Information</div>
+          </div>
+          <div class="step-body">
+            <p>Provide your upline with the following. This is required to register you in the system and move into contracting.</p>
+            <ul class="item-list">
+              <li><strong>Full Legal Name</strong></li>
+              <li><strong>NPN</strong> — National Producer Number</li>
+              <li><strong>Social Security Number</strong> — for carrier identity verification</li>
+              <li><strong>Licensed States</strong> — all states you are currently licensed in</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="step">
+        <div class="step-track">
+          <div class="step-dot">4</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-title">Gather Your Documents</div>
+          </div>
+          <div class="step-body">
+            <p>Have these ready before contracting begins. Being prepared upfront eliminates delays and gets you in the field faster.</p>
+            <ul class="item-list">
+              <li><strong>Government-Issued Photo ID</strong> — Driver's License or Passport</li>
+              <li><strong>E&amp;O Insurance Certificate</strong> — Errors &amp; Omissions</li>
+              <li><strong>AML Training Certificate</strong> — Anti-Money Laundering</li>
+              <li><strong>Voided Check</strong> — for direct deposit setup</li>
+              <li><strong>Proof of Licensure</strong> — state license certificate</li>
+              <li><strong>Existing Carrier Contracts</strong> — if transferring from another agency</li>
+              <li class="optional"><strong>Professional Headshot</strong> — optional, for your agent profile</li>
+            </ul>
+            <div class="note">
+              <strong>AML Training:</strong> Typically completed through LIMRA or your carrier's onboarding portal. Ask your upline for the preferred provider.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="step">
+        <div class="step-track">
+          <div class="step-dot">5</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-title">Complete Carrier Contracting</div>
+          </div>
+          <div class="step-body">
+            <p>
+              Once your information and documents are submitted, your upline will walk you through contracting with the carriers you'll write business for. This step officially appoints you as an agent and locks in your commission level.
+            </p>
+            <p>Most contracting is completed digitally with a typical turnaround of a few business days per carrier.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="step">
+        <div class="step-track">
+          <div class="step-dot">6</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-title">Review the Compensation Guide</div>
+          </div>
+          <div class="step-body">
+            <p>
+              Know exactly how you get paid before you write your first policy. The Compensation Guide covers commission tiers, bonus structures, and how advancing within the firm grows your earning potential. Read it thoroughly.
+            </p>
+            <a href="compensation.html" class="step-link">
+              Compensation Guide
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="step">
+        <div class="step-track">
+          <div class="step-dot">7</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-card">
+          <div class="step-header">
+            <div class="step-title">Explore Your Resources</div>
+          </div>
+          <div class="step-body">
+            <p>
+              The Resources page is your ongoing toolkit — scripts, training materials, carrier links, and product guides. Bookmark it and return often. The agents who consistently outperform are the ones who use every tool available.
+            </p>
+            <a href="resources.html" class="step-link">
+              Resources
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
 
   <footer>
-    <p>
-      <a href="privacypolicy.html" style="color: rgb(0, 0, 0); text-decoration: underline;">
-        Privacy Policy © <span id="year"></span>
-      </a>
-    </p>
+    <p><a href="privacypolicy.html">Privacy Policy © <span id="year"></span></a></p>
     <p>Cornerstone Foundation Group. Established 2026.</p>
   </footer>
 
   <script src="auth.js"></script>
-
   <script>
     window.onload = function () {
       document.getElementById("year").textContent = new Date().getFullYear();
